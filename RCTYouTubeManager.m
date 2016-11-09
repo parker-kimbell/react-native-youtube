@@ -31,7 +31,9 @@ RCT_EXPORT_MODULE();
         @"youtubeVideoChangeState",
         @"youtubeVideoChangeQuality",
         @"youtubeVideoError",
-        @"youtubeProgress"
+        @"youtubeProgress",
+        @"videoExitFullScreen",
+        @"videoEnterFullScreen"
      ];
 }
 

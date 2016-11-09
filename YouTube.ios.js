@@ -32,6 +32,8 @@ export default class YouTube extends Component {
     onChangeState: PropTypes.func,
     onChangeQuality: PropTypes.func,
     onError: PropTypes.func,
+    onFullScreenExit: PropTypes.func,
+    onFullScreenEnter: PropTypes.func,
     loop: PropTypes.bool,
   };
 
@@ -62,12 +64,23 @@ export default class YouTube extends Component {
   _onError(event) {
     return this.props.onError && this.props.onError(event.nativeEvent);
   }
+
   _onProgress(event){
-      return this.props.onProgress && this.props.onProgress(event.nativeEvent);
+    return this.props.onProgress && this.props.onProgress(event.nativeEvent);
   }
+
+  _onFullScreenExit(event) {
+    return this.props.onFullScreenExit && this.props.onFullScreenExit(event.nativeEvent);
+  }
+
+  _onFullScreenEnter(event) {
+    return this.props.onFullScreenEnter && this.props.onFullScreenEnter(event.nativeEvent);
+  }
+
   seekTo(seconds){
     NativeModules.YouTubeManager.seekTo(ReactNative.findNodeHandle(this), parseInt(seconds, 10));
   }
+
   render() {
     var style = [styles.base, this.props.style];
     var nativeProps = Object.assign({}, this.props);
@@ -77,6 +90,8 @@ export default class YouTube extends Component {
     nativeProps.onYoutubeVideoChangeQuality = this._onChangeQuality.bind(this);
     nativeProps.onYoutubeVideoError = this._onError.bind(this);
     nativeProps.onYoutubeProgress = this._onProgress.bind(this);
+    nativeProps.onVideoExitFullScreen = this._onFullScreenExit.bind(this);
+    nativeProps.onVideoEnterFullScreen = this._onFullScreenEnter.bind(this);
 
     /*
      * Try to use `playerParams` instead of settings `playsInline` and
