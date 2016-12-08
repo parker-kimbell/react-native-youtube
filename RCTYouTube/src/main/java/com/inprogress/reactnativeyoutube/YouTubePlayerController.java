@@ -31,6 +31,7 @@ public class YouTubePlayerController implements
     private boolean showInfo = true;
     private boolean loop = false;
     private boolean playInline = false;
+    private boolean fullscreen = true;
 
 
     public YouTubePlayerController(final Context mContext, YouTubeView youTubeView) {
@@ -47,6 +48,9 @@ public class YouTubePlayerController implements
             mYouTubePlayer.setPlayerStateChangeListener(this);
             mYouTubePlayer.setPlaybackEventListener(this);
             mYouTubePlayer.setOnFullscreenListener(this);
+
+            // Update config
+            mYouTubePlayer.setShowFullscreenButton(fullscreen);
 
             // Emit 'onReady' event for player
             mYouTubeView.playerViewDidBecomeReady();
@@ -266,6 +270,13 @@ public class YouTubePlayerController implements
         }
     }
 
+    public void setFullscreen(boolean fullscreen) {
+        this.fullscreen = fullscreen;
+        if (isLoaded()) {
+            mYouTubePlayer.setShowFullscreenButton(fullscreen);
+        }
+    }
+
     //TODO
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
@@ -324,4 +335,7 @@ public class YouTubePlayerController implements
         return playInline;
     }
 
+    public boolean isFullscreen() {
+        return fullscreen;
+    }
 }
