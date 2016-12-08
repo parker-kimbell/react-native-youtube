@@ -148,7 +148,7 @@ public class YouTubePlayerController implements
 
     @Override
     public void onLoaded(String s) {
-
+        mYouTubeView.didChangeToState("loaded");
     }
 
     @Override
