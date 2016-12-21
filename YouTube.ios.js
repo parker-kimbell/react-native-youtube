@@ -35,6 +35,7 @@ export default class YouTube extends Component {
     onFullScreenExit: PropTypes.func,
     onFullScreenEnter: PropTypes.func,
     loop: PropTypes.bool,
+    fs: PropTypes.bool
   };
 
   static defaultProps = {
@@ -130,6 +131,10 @@ export default class YouTube extends Component {
         if (this.props.rel!==undefined) {
           nativeProps.playerParams.playerVars.rel = this.props.rel ? 1 : 0;
           delete nativeProps.rel;
+        };
+        if (this.props.fs!==undefined) {
+          nativeProps.playerParams.playerVars.fs = this.props.fs ? 1 : 0;
+          delete nativeProps.fs;
         };
       };
     } else {
